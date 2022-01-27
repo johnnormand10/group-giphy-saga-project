@@ -20,6 +20,28 @@ app.use(express.static('build'));
 app.use('/api/favorite', favoriteRouter);
 app.use('/api/category', categoryRouter);
 
+// Express Routes
+
+app.get ('/category', (req, res) => {
+  axios({
+      method: 'GET',
+      url: 'https://api.giphy.com/v1/gifs/search',
+      params: {
+          api_key: process.env.GIPHY_API_KEY,
+          q: '',
+          rating: 'pg'
+      }
+  })
+  .then((apiRes) => {
+    res.send(apiRes.data);
+})
+.catch((err) => {
+    console.error('', err);
+    res.sendStatus(500);
+})
+});
+
+
 // Listen
 app.listen(PORT, () => {
   console.log(`Listening on port: ${PORT}`);
