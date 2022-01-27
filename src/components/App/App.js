@@ -1,10 +1,14 @@
 import React from 'react';
+import Home from '../Home/Home';
+
 
 function App(props) {
   return (
+  
     <div>
-      <h1>Giphy Search!</h1>
+    <Home />
     </div>
+  
   );
 }
 
