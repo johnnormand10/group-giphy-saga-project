@@ -18,7 +18,7 @@ function Search() {
         console.log('newSearch in Search.jsx is:', newSearch);
 
         dispatch({
-            type: 'SET_SEARCH',
+            type: 'FETCH_SEARCH',
             payload: newSearch
         })
 
