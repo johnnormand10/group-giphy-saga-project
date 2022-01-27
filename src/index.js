@@ -8,7 +8,7 @@ import {takeEvery, put} from 'redux-saga/effects'
 import axios from 'axios';
 import App from './components/App/App';
 
-//watch fro functions
+//watch for functions
   function* rootSaga() {
       yield takeEvery ('SET_SEARCH', setSearch )
   }
@@ -29,12 +29,20 @@ import App from './components/App/App';
           console.err('setSearch failed', err)
       }
   }
-
+ const searchReducer = (state = [], action) => {
+    switch (action.type) {
+        case 'SET_SEARCH':
+            return action.payload;
+        default:
+            return state;
+    }
+}
 
 const sagaMiddleware = createSagaMiddleware();
 
 const store = createStore(
     combineReducers({ 
+        searchReducer
     }),
     applyMiddleware(sagaMiddleware, logger),
 
