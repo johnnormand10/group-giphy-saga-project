@@ -1,6 +1,8 @@
 import React from 'react';
 import {useSelector} from 'react-redux';
 
+import SearchItem from '../SearchItem/SearchItem';
+
 const SearchList = () => {
 
     // gain access to search reducer
@@ -11,7 +13,7 @@ const SearchList = () => {
         <ul>
             {findIt.map((image, i) => (
                 // need to move this to SearchItem component
-                <img src={image.url} />
+                <SearchItem image={image}/>
             ))}
         </ul>
     )
