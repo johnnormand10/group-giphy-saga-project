@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {createStore, combineReducers, applyMiddleware} from 'redux';
-import {logger} from 'redux-logger';
+import logger from 'redux-logger';
 import  createSagaMiddleware from 'redux-saga';
 import {Provider} from 'react-redux';
 import {takeEvery, put} from 'redux-saga/effects'
@@ -9,30 +9,30 @@ import axios from 'axios';
 import App from './components/App/App';
 
 //watch for functions
-  function* rootSaga() {
-      yield takeEvery ('SET_SEARCH', setSearch )
-  }
+function* rootSaga() {
+    yield takeEvery('FETCH_SEARCH', setSearch )
+}
 
-  function* setSearch(){
-      try{
-          console.log('made it to  search');
+function* setSearch(action){
+    try{
+        console.log('made it to  search', action.payload);
 
-          let response = yield axios.get('/category');
-          console.log('response.data:', response.data);
+        let response = yield axios.get('/api/search');
 
-          yield put({
-              type: "",
-              payload: response.data
-          })
-      }
-      catch (err) {
-          console.err('setSearch failed', err)
-      }
-  }
- const searchReducer = (state = [], action) => {
+        yield put({
+            type: 'SET_SEARCH',
+            payload: action.payload
+        })
+    }
+    catch (err) {
+        console.error('setSearch failed', err)
+    }
+}
+const searchReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_SEARCH':
-            return action.payload;
+            console.log('sent to searchReducer', action.payload);
+            return state=action.payload;
         default:
             return state;
     }
@@ -49,4 +49,4 @@ const store = createStore(
 );
     sagaMiddleware.run(rootSaga);
 
-ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('react-root'));
+ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));

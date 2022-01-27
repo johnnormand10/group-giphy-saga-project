@@ -1,13 +1,18 @@
+require('dotenv').config();
+
 const express = require('express');
 const bodyParser = require('body-parser');
+const axios = require('axios');
 
 const app = express();
 // App PORT set with production check
 const PORT = process.env.PORT || 5000;
 
+
 // Route includes
 const favoriteRouter = require('./routes/favorite.router');
 const categoryRouter = require('./routes/category.router');
+const searchRouter =  require('./routes/search.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -19,28 +24,7 @@ app.use(express.static('build'));
 // Routes
 app.use('/api/favorite', favoriteRouter);
 app.use('/api/category', categoryRouter);
-
-// Express Routes
-
-app.get ('/category', (req, res) => {
-  axios({
-      method: 'GET',
-      url: 'https://api.giphy.com/v1/gifs/search',
-      params: {
-          api_key: process.env.GIPHY_API_KEY,
-          q: '',
-          rating: 'pg'
-      }
-  })
-  .then((apiRes) => {
-    res.send(apiRes.data);
-})
-.catch((err) => {
-    console.error('', err);
-    res.sendStatus(500);
-})
-});
-
+app.use('/api/search', searchRouter);
 
 // Listen
 app.listen(PORT, () => {
