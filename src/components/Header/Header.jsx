@@ -1,4 +1,4 @@
-const Header = () => {
+function Header(){
     return (
         <header>
             <h1>FUN STUFF!</h1>

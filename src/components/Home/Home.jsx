@@ -1,9 +1,13 @@
 import Header from '../Header/Header';
+import Search from '../Search/Search';
 
-const Home = () => {
-return(
-<Header />
-)
+function Home(){
+    return(
+        <>
+            <Header />
+            <Search />
+        </>
+    )
 }
 
 export default Home;
