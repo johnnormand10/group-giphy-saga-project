@@ -6,7 +6,6 @@ import axios from 'axios';
 import FavoriteItem from '../FavoriteItem/FavoriteItem';
 
 const FavoriteList = () => {
-    useEffect 
 
     // gain access to search reducer
     const favoriteResults = useSelector(store => store.getFavorite);
@@ -18,7 +17,7 @@ return (
     <>
     <div>
         {favoriteResults.map((url) => (
-            <FavoriteItem url={url.url} alt ={url.name} key ={url.id}/>
+            <FavoriteItem url={url.url} alt ={url.name} id={url.id}/>
         ))}
     </div>
     </>
