@@ -35,7 +35,7 @@ const searchReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_SEARCH':
             console.log('sent to searchReducer', action.payload);
-            return [...state, action.payload];
+            return action.payload;
         default:
             return state;
     }
