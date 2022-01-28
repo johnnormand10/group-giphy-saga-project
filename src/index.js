@@ -14,6 +14,8 @@ function* rootSaga() {
 
 	yield takeEvery('ADD_FAVORITE', addFavorite);
 	yield takeEvery('FETCH_FAVORITE', fetchFavorite);
+
+	yield takeEvery('Add_CATEGORY', addCategory);
 }
 
 //______________________________________________
@@ -77,6 +79,20 @@ function* addFavorite(action) {
 		yield put({ type: 'FETCH_FAVORITE' });
 	} catch (error) {
 		console.error('error with post request', error);
+	}
+}
+
+function* addCategory(action) {
+	let categoryId = action.payload.categoryId;
+	let id = action.payload.id;
+	console.log('in index addCategory categoryId', categoryId);
+	console.log('in index addCategory id', id);
+
+	try {
+		yield axios.put('/api/favorite', {categoryId, id});
+	}
+	catch (error) {
+		console.error('error with PUT request', err);
 	}
 }
 //____________________________________________
