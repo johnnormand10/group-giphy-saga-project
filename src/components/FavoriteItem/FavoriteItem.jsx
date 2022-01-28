@@ -9,9 +9,11 @@ const FavoriteItem = ({url, alt, id}) => {
 
     const addFavorite = () => {
         console.log('in FavoriteItem with category value and image id', id);
-        dispatch({type:'ADD_CATEGORY', payload: {
-            categoryId: category,
-            id: id
+        dispatch({
+            type:'ADD_CATEGORY', 
+            payload: {
+            categoryId: Number(category),
+            id: Number(id)
         }});
     }
 
