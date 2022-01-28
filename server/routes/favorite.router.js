@@ -40,8 +40,8 @@ router.post('/', (req, res) => {
 router.put('/:favId', (req, res) => {
 	// req.body should contain a category_id to add to this favorite image
 
-  console.log('in PUT fav router req.body', req.body);
-  console.log('in PUT fav router req.params', req.params.id);
+  console.log('in PUT fav router req.body', req.body.categoryId);
+  console.log('in PUT fav router req.params', req.body.id);
 
   const queryText = `
     UPDATE "favImages"
@@ -50,7 +50,7 @@ router.put('/:favId', (req, res) => {
   `;
 
   const queryParams = [
-    req.body, req.params.id
+    req.body.categoryId, req.body.id
   ];
 
   pool.query(queryText, queryParams)
@@ -59,7 +59,7 @@ router.put('/:favId', (req, res) => {
     })
     .catch((err) => {
       res.sendStatus(500);
-    })
+    });
 });
 
 // delete a favorite

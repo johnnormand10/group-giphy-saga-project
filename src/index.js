@@ -15,7 +15,7 @@ function* rootSaga() {
 	yield takeEvery('ADD_FAVORITE', addFavorite);
 	yield takeEvery('FETCH_FAVORITE', fetchFavorite);
 
-	yield takeEvery('Add_CATEGORY', addCategory);
+	yield takeEvery('ADD_CATEGORY', addCategory);
 }
 
 //______________________________________________
@@ -89,10 +89,10 @@ function* addCategory(action) {
 	console.log('in index addCategory id', id);
 
 	try {
-		yield axios.put('/api/favorite', {categoryId, id});
+		yield axios.put(`/api/favorite/${id}`, {categoryId, id});
 	}
 	catch (error) {
-		console.error('error with PUT request', err);
+		console.error('error with PUT request', error);
 	}
 }
 //____________________________________________
