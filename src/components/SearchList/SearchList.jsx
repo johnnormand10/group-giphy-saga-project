@@ -43,7 +43,7 @@ const SearchList = () => {
         <div>
             {searchResults.map((url, i) => (
                 // need to move this to SearchItem component
-                <SearchItem url={url} value={i}/>
+                <SearchItem url={url} key={i}/>
             ))}
         </div>
         </>
