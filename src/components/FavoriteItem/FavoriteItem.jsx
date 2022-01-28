@@ -1,22 +1,22 @@
 import React, {useState} from 'react';
 import { useDispatch } from 'react-redux';
 
-const FavoriteItem = ({url, alt, key}) => {
+const FavoriteItem = ({url, alt, id}) => {
 
     const [category, setCategory] = useState(1);
 
     const dispatch = useDispatch();
 
     const addFavorite = () => {
-        console.log('in FavoriteItem with category value and image id', key);
+        console.log('in FavoriteItem with category value and image id', id);
         dispatch({type:'ADD_CATEGORY', payload: {
             categoryId: category,
-            id: key
+            id: id
         }});
     }
 
     return(
-        <div key={key}>
+        <div key={id}>
             <img src={url} alt={url} /> 
             {/* drop down for different categories */}
             <select name="category" id="category" onChange={(e) => setCategory(e.target.value)} value={category} >
