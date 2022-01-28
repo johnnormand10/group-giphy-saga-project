@@ -17,22 +17,25 @@ function* setSearch(action){
     try{
         console.log('made it to  search', action.payload);
 
-        let response = yield axios.get('/api/search');
-
+        let newSearch = action.payload;
+        let response = yield axios.get(`/api/search?q=${newSearch}`)
+        console.log('response in setSearch is:', response);
+        
         yield put({
             type: 'SET_SEARCH',
-            payload: action.payload
+            payload: response.data.data
         })
     }
     catch (err) {
         console.error('setSearch failed', err)
     }
 }
+
 const searchReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_SEARCH':
             console.log('sent to searchReducer', action.payload);
-            return state=action.payload;
+            return [...state, action.payload];
         default:
             return state;
     }

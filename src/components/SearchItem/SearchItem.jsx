@@ -1,8 +1,11 @@
-const SearchItem = ({image}) => {
+const SearchItem = ({url, i}) => {
+    
+    //const image = url.images.url;
+
     return(
-        <li key={image.id}>
-            <img src={image} />
-        </li>
+        <div key={i}>
+            <img src={url} /> 
+        </div>
     )
 }
 
